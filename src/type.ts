@@ -1,4 +1,4 @@
-export enum type {
+export enum typePackage {
   equipament,
   supply,
   capsule,
