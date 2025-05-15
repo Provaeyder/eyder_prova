@@ -1,10 +1,11 @@
-export enum AtmosphereType{
-    thin,
-    dense,
-    toxic,
-    corrosive,
-    gasGiant,
-    coldMethane,
-    magneticIonized,
-    earthLike,
+export enum AtmosphereType {
+  thin,
+  dense,
+  toxic,
+  trace,
+  corrosive,
+  gasGiant,
+  coldMethane,
+  magneticIonized,
+  earthLike,
 }

@@ -1,5 +1,5 @@
 export enum type {
   equipament,
-  provision,
+  supply,
   capsule,
 }
