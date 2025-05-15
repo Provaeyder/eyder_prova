@@ -1,7 +1,7 @@
 import { typePackage } from "./type";
 import { SpaceShip } from "./spaceship";
 import { getRandomFloat, getRandomInt } from "./random";
-abstract class Package {
+export abstract class Package {
   size: number;
   weight: number;
   type: typePackage;
