@@ -20,7 +20,7 @@ export abstract class Package {
   abstract inapropieteSpaceShip(SpaceShip: string): boolean
 }
 //capsulas blindadas, amostras biológicas, módulos de comunicação, pacotes de suprimento, ferramneta de mineração
-class ArmoredCapsules extends Package{
+export class ArmoredCapsules extends Package{
     constructor(){
         super(getRandomFloat(1,2), getRandomInt(45,250),typePackage.capsule,[])
     }
@@ -33,7 +33,7 @@ class ArmoredCapsules extends Package{
       return true;
     }
 }
-class BiologicalSamples extends Package{
+export class BiologicalSamples extends Package{
     constructor(){
         super(getRandomFloat(1,2), getRandomInt(30,60), typePackage.supply, [])
     }
@@ -46,6 +46,40 @@ class BiologicalSamples extends Package{
       return true;
     }
 }
-class CommunicationModules extends Package{}
-class SupplyPackages extends Package{}
-class MiningTools extends Package{}
+export class CommunicationModules extends Package{
+  constructor(){
+    super(getRandomFloat(1,2), getRandomInt(30,60), typePackage.supply, [])
+}
+inapropieteSpaceShip(SpaceShip: string): boolean {
+  for( const ship of this.limitation){
+    if (ship == SpaceShip){
+      return false;
+    }
+  }
+  return true;
+}
+}
+export class SupplyPackages extends Package{
+  constructor(){
+        super(getRandomFloat(1,2), getRandomInt(30,60), typePackage.supply, [])
+    }
+    inapropieteSpaceShip(SpaceShip: string): boolean {
+      for( const ship of this.limitation){
+        if (ship == SpaceShip){
+          return false;
+        }
+      }
+      return true;
+    }
+}
+export class MiningTools extends Package{ constructor(){
+  super(getRandomFloat(1,2), getRandomInt(30,60), typePackage.supply, [])
+}
+inapropieteSpaceShip(SpaceShip: string): boolean {
+for( const ship of this.limitation){
+  if (ship == SpaceShip){
+    return false;
+  }
+}
+return true;
+}}

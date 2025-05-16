@@ -1,5 +1,5 @@
 export enum typePackage {
-  equipament,
-  supply,
-  capsule,
+  equipament = 'equipament',
+  supply = 'supply',
+  capsule = 'capsule',
 }

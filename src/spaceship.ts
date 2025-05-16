@@ -24,15 +24,13 @@ export abstract class SpaceShip {
   }
 
   abstract enoughFuel(
-    distance: number,
-    autonomy: number,
-    fuel: number
+    pla: Planet
   ): boolean;
-  abstract canCarry(capacity: number, weight: number): boolean;
+  abstract canCarry(weight: number): boolean;
   abstract compatiblePlanet(planet: string): boolean;
 }
 // consertar os métodos enoughFuel e canCarry nas subclasses.
-class cargoShip extends SpaceShip {
+export class cargoShip extends SpaceShip {
   constructor() {
     super(
       getRandomInt(1000, 1500),
@@ -43,8 +41,8 @@ class cargoShip extends SpaceShip {
       'cargoShip',
     );
   }
-  enoughFuel(distance: number): boolean {
-    return this.fuelVolume > distance / this.autonomy;
+  enoughFuel(pla: Planet): boolean {
+    return this.fuelVolume > pla.distance / this.autonomy;
   }
   canCarry(weight: number): boolean {
     return this.capacity > weight;
@@ -58,7 +56,7 @@ class cargoShip extends SpaceShip {
     return false
   }
 }
-class ScoutShip extends SpaceShip {
+export class ScoutShip extends SpaceShip {
   constructor() {
     super(
       getRandomInt(200, 250),
@@ -69,11 +67,11 @@ class ScoutShip extends SpaceShip {
       'ScoutShip',
     );
   }
-  enoughFuel(distance: number, autonomy: number, fuel: number): boolean {
-    return fuel > distance / autonomy;
+  enoughFuel(pla: Planet): boolean {
+    return this.fuelVolume > pla.distance / this.autonomy;
   }
-  canCarry(capacity: number, weight: number): boolean {
-    return capacity > weight;
+  canCarry(weight: number): boolean {
+    return this.capacity > weight;
   }
   compatiblePlanet(planet: string): boolean {
     for(const star of this.compatibility){
@@ -84,7 +82,7 @@ class ScoutShip extends SpaceShip {
     return false
   }
 }
-class FastTransport extends SpaceShip {
+export class FastTransport extends SpaceShip {
   constructor() {
     super(
       getRandomInt(300, 350),
@@ -95,11 +93,11 @@ class FastTransport extends SpaceShip {
       'FastTransport',
     );
   }
-  enoughFuel(distance: number, autonomy: number, fuel: number): boolean {
-    return fuel > distance / autonomy;
+  enoughFuel(pla: Planet): boolean {
+    return this.fuelVolume > pla.distance / this.autonomy;
   }
-  canCarry(capacity: number, weight: number): boolean {
-    return capacity > weight;
+  canCarry(weight: number): boolean {
+    return this.capacity > weight;
   }
   compatiblePlanet(planet: string): boolean {
     for(const star of this.compatibility){
@@ -110,7 +108,7 @@ class FastTransport extends SpaceShip {
     return false
   }
 }
-class ThermalShieldShip extends SpaceShip {
+export class ThermalShieldShip extends SpaceShip {
   constructor() {
     super(
       getRandomInt(400, 500),
@@ -122,11 +120,14 @@ class ThermalShieldShip extends SpaceShip {
     );
   }
 
-  enoughFuel(distance: number, autonomy: number, fuel: number): boolean {
-    return fuel > distance / autonomy;
+  enoughFuel(pla: Planet): boolean {
+    if(this.fuelVolume > pla.distance / this.autonomy){
+      return true
+    }
+    return false
   }
-  canCarry(capacity: number, weight: number): boolean {
-    return capacity > weight;
+  canCarry(weight: number): boolean {
+    return this.capacity > weight;
   }
   compatiblePlanet(planet: string): boolean {
     for(const star of this.compatibility){
