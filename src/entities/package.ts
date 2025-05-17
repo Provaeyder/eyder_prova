@@ -14,15 +14,16 @@ export abstract class Package {
     this.limitation = limitation
     this.packageName = packageName
   }
-  abstract inapropieteSpaceShip(SpaceShip: String): boolean
+  abstract inapropieteSpaceShip(spaceship: SpaceShip): boolean
 }
 export class ArmoredCapsules extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(45, 250), typePackage.capsule, [], 'ArmoredCapsules')
   }
-  inapropieteSpaceShip(SpaceShip: string): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by ArmoredCapsules`)
         return false
       }
     }
@@ -33,9 +34,10 @@ export class BiologicalSamples extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, [], 'BiologicalSamples')
   }
-  inapropieteSpaceShip(SpaceShip: String): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by BiologicalSamples`)
         return false
       }
     }
@@ -46,9 +48,10 @@ export class CommunicationModules extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.eletronic, [], 'CommunicationModules')
   }
-  inapropieteSpaceShip(SpaceShip: string): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by CommunicationModules`)
         return false
       }
     }
@@ -59,9 +62,10 @@ export class SupplyPackages extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, [], 'SupplyPackages')
   }
-  inapropieteSpaceShip(SpaceShip: string): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by SupplyPackages`)
         return false
       }
     }
@@ -72,9 +76,10 @@ export class MiningTools extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.equipament, [], 'MiningTools')
   }
-  inapropieteSpaceShip(SpaceShip: string): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by MiningTools`)
         return false
       }
     }
@@ -85,9 +90,10 @@ export class lazerGun extends Package {
   constructor() {
     super(getRandomFloat(1, 2), getRandomInt(30, 50), typePackage.weapon, [], 'LazerGun')
   }
-  inapropieteSpaceShip(SpaceShip: string): boolean {
+  inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
-      if (ship == SpaceShip) {
+      if (ship == spaceship.spaceShipType) {
+        console.log(`${spaceship.spaceShipType} is not accept by lazerGun`)
         return false
       }
     }

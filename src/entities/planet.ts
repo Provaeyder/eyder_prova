@@ -1,6 +1,7 @@
 import { AtmosphereType } from '../atmosphere'
 import { typePackage } from '../type'
 import { getRandomInt } from '../helper/random'
+import { Package } from './package'
 
 export abstract class Planet {
   public readonly distance: number
@@ -13,7 +14,7 @@ export abstract class Planet {
     this.restrictions = restrictions
     this.typePlanet = typePlanet
   }
-  abstract packageAccept(cargo: typePackage): boolean
+  abstract packageAccept(Pkg: Package): boolean
 }
 
 export class RockyPlanet extends Planet {
@@ -21,9 +22,10 @@ export class RockyPlanet extends Planet {
     // o type pode dar bode
     super(getRandomInt(2000, 10000), AtmosphereType.thin, [typePackage.capsule], 'RockyPlanet')
   }
-  packageAccept(cargo: typePackage): boolean {
+  packageAccept(Pkg: Package): boolean {
     for (const delivery of this.restrictions) {
-      if (delivery == cargo) {
+      if (delivery == Pkg.type) {
+        console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by RockyPlanet.`)
         return false
       }
     }
@@ -34,10 +36,10 @@ export class GassyPlanet extends Planet {
   constructor() {
     super(getRandomInt(15000, 200000), AtmosphereType.dense, [typePackage.equipament], 'GassyPlanet')
   }
-  packageAccept(cargo: typePackage): boolean {
+  packageAccept(Pkg: Package): boolean {
     for (const delivery of this.restrictions) {
-      console.log(delivery)
-      if (delivery == cargo) {
+      if (delivery == Pkg.type) {
+        console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by GassyPlanet.`)
         return false
       }
     }
@@ -48,9 +50,10 @@ export class ColdPlanet extends Planet {
   constructor() {
     super(getRandomInt(59000, 200000), AtmosphereType.trace, [typePackage.supply], 'ColdPlanet')
   }
-  packageAccept(cargo: typePackage): boolean {
+  packageAccept(Pkg: Package): boolean {
     for (const delivery of this.restrictions) {
-      if (delivery == cargo) {
+      if (delivery == Pkg.type) {
+        console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by ColdPlanet.`)
         return false
       }
     }
@@ -66,9 +69,10 @@ export class CorrosivePlanet extends Planet {
       'CorrosivePlanet'
     )
   }
-  packageAccept(cargo: typePackage): boolean {
+  packageAccept(Pkg: Package): boolean {
     for (const delivery of this.restrictions) {
-      if (delivery == cargo) {
+      if (delivery == Pkg.type) {
+        console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by CorrosivePlanet.`)
         return false
       }
     }
@@ -79,9 +83,10 @@ export class MagnetiPlanet extends Planet {
   constructor() {
     super(getRandomInt(220500, 340000), AtmosphereType.magneticIonized, [typePackage.equipament], 'MagnetiPlanet')
   }
-  packageAccept(cargo: typePackage): boolean {
+  packageAccept(Pkg: Package): boolean {
     for (const delivery of this.restrictions) {
-      if (delivery == cargo) {
+      if (delivery == Pkg.type) {
+        console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by MagnetiPlanet.`)
         return false
       }
     }

@@ -1,5 +1,6 @@
 import { Planet } from './planet'
 import { getRandomFloat, getRandomInt } from '../helper/random'
+import { Package } from './package'
 export abstract class SpaceShip {
   spaceShipType: String
   capacity: number
@@ -24,14 +25,13 @@ export abstract class SpaceShip {
   }
 
   abstract enoughFuel(pla: Planet): boolean
-  abstract canCarry(weight: number): boolean
-  abstract compatiblePlanet(planet: string): boolean
+  abstract canCarry(Pkg: Package): boolean
+  abstract compatiblePlanet(pla: Planet): boolean
 }
-// consertar os métodos enoughFuel e canCarry nas subclasses.
 export class cargoShip extends SpaceShip {
   constructor() {
     super(
-      getRandomInt(1000, 1500),
+      getRandomInt(100, 350),
       getRandomInt(200, 250),
       getRandomInt(30, 123),
       getRandomInt(20000, 60000),
@@ -40,24 +40,34 @@ export class cargoShip extends SpaceShip {
     )
   }
   enoughFuel(pla: Planet): boolean {
-    return this.fuelVolume > pla.distance / this.autonomy
+    if(!(this.fuelVolume > pla.distance / this.autonomy)){
+      console.log(`cargoShip has no fuel to reach ${pla.typePlanet}`)
+      return false
+    }
+    return true
   }
-  canCarry(weight: number): boolean {
-    return this.capacity > weight
+  canCarry(Pkg: Package): boolean {
+    if(!(this.capacity > Pkg.weight)){
+      console.log(`cargoShip failed to deliver: "${Pkg.packageName}" : exceeds capacity."`)
+      return false
+    }
+    return true
   }
-  compatiblePlanet(planet: string): boolean {
+  
+  compatiblePlanet(Pla: Planet): boolean {
     for (const star of this.compatibility) {
-      if (star == planet) {
+      if (!(star == Pla.typePlanet)) {
         return true
       }
     }
-    return false
+    console.log(`cargoShip is incompatible with ${Pla.typePlanet}`)
+    return true
   }
 }
 export class ScoutShip extends SpaceShip {
   constructor() {
     super(
-      getRandomInt(200, 250),
+      getRandomInt(70, 100),
       getRandomInt(6000, 23000),
       getRandomInt(20, 100),
       getRandomInt(2500, 3000),
@@ -66,24 +76,33 @@ export class ScoutShip extends SpaceShip {
     )
   }
   enoughFuel(pla: Planet): boolean {
-    return this.fuelVolume > pla.distance / this.autonomy
+    if(!(this.fuelVolume > pla.distance / this.autonomy)){
+      console.log(`ScoutShip has no fuel to reach ${pla.typePlanet}`)
+      return false
+    }
+    return true
   }
-  canCarry(weight: number): boolean {
-    return this.capacity > weight
+  canCarry(Pkg: Package): boolean {
+    if(!(this.capacity > Pkg.weight)){
+      console.log(`ScoutShip failed to deliver: "${Pkg.packageName}" : exceeds capacity."`)
+      return false
+    }
+    return true
   }
-  compatiblePlanet(planet: string): boolean {
+  compatiblePlanet(Pla: Planet): boolean {
     for (const star of this.compatibility) {
-      if (star == planet) {
+      if ((star == Pla.typePlanet)) {
         return true
       }
     }
+    console.log(`ScoutShip is incompatible with ${Pla.typePlanet}`)
     return false
   }
 }
 export class FastTransport extends SpaceShip {
   constructor() {
     super(
-      getRandomInt(300, 350),
+      getRandomInt(90, 250),
       getRandomInt(300, 900),
       getRandomInt(45, 189),
       getRandomInt(40000, 50000),
@@ -92,47 +111,62 @@ export class FastTransport extends SpaceShip {
     )
   }
   enoughFuel(pla: Planet): boolean {
-    return this.fuelVolume > pla.distance / this.autonomy
+    if(!(this.fuelVolume > pla.distance / this.autonomy)){
+      console.log(`FastTransport has no fuel to reach ${pla.typePlanet}`)
+      return false
+    }
+    return true
   }
-  canCarry(weight: number): boolean {
-    return this.capacity > weight
+  canCarry(Pkg: Package): boolean {
+    if(!(this.capacity > Pkg.weight)){
+      console.log(`FastTransport failed to deliver: "${Pkg.packageName}" : exceeds capacity."`)
+      return false
+    }
+    return true
   }
-  compatiblePlanet(planet: string): boolean {
+  compatiblePlanet(Pla: Planet): boolean {
     for (const star of this.compatibility) {
-      if (star == planet) {
+      if (!(star == Pla.typePlanet)) {
         return true
       }
     }
-    return false
+    console.log(`FastTransport is incompatible with ${Pla.typePlanet}`)
+    return true
   }
 }
 export class ThermalShieldShip extends SpaceShip {
   constructor() {
     super(
-      getRandomInt(400, 500),
+      getRandomInt(10, 50),
       getRandomInt(150, 200),
       getRandomInt(67, 80),
       getRandomInt(45008, 50005),
       ['RockyPlanet', 'CorrosivePlanet', 'ColdPlanet'],
-      'FastTransport'
+      'ThermalShieldShip'
     )
   }
 
   enoughFuel(pla: Planet): boolean {
-    if (this.fuelVolume > pla.distance / this.autonomy) {
-      return true
+    if(!(this.fuelVolume > pla.distance / this.autonomy)){
+      console.log(`ThermalShieldShip has no fuel to reach ${pla.typePlanet}`)
+      return false
     }
-    return false
+    return true
   }
-  canCarry(weight: number): boolean {
-    return this.capacity > weight
+  canCarry(Pkg: Package): boolean {
+    if(!(this.capacity > Pkg.weight)){
+      console.log(`ThermalShieldShip failed to deliver: "${Pkg.packageName}" : exceeds capacity."`)
+      return false
+    }
+    return true
   }
-  compatiblePlanet(planet: string): boolean {
+  compatiblePlanet(Pla: Planet): boolean {
     for (const star of this.compatibility) {
-      if (star == planet) {
+      if (!(star == Pla.typePlanet)) {
         return true
       }
     }
+    console.log(`ThermalShieldShip is incompatible with ${Pla.typePlanet}`)
     return false
   }
 }

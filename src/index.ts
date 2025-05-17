@@ -20,11 +20,13 @@ const packages = [
   new MiningTools(),
   new lazerGun(),
 ]
-const choseShips = randomArray(ships, 3)
+const choseShips = randomArray(ships, 4)
 const chosePlanets = randomArray(planets, 3)
 const chosePackages = randomArray(packages, 5)
 
 for (let x = 0; x < 3; x++) {
+  console.log('=====================================================================')
+  console.log(`Assigned ${choseShips[x].spaceShipType}\n`)
   for (let i = 0; i < chosePlanets.length; i++) {
     starMission(choseShips[x], randomItem(chosePlanets), randomItem(chosePackages))
     console.log('')
