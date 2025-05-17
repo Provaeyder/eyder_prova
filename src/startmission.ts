@@ -1,73 +1,33 @@
-import {
-  ArmoredCapsules,
-  BiologicalSamples,
-  CommunicationModules,
-  MiningTools,
-  Package,
-  SupplyPackages,
-} from "./package";
-import {
-  ColdPlanet,
-  CorrosivePlanet,
-  GassyPlanet,
-  MagnetiPlanet,
-  Planet,
-  RockyPlanet,
-} from "./planet";
-import { getRandomInt, randomItem } from "./random";
-import {
-  cargoShip,
-  ScoutShip,
-  ThermalShieldShip,
-  FastTransport,
-  SpaceShip,
-} from "./spaceship";
+import { Package } from './entities/package'
+import { Planet } from './entities/planet'
+import { SpaceShip } from './entities/spaceship'
 
-class Mission {
-  public readonly packages: Package[];
-  private planets: Planet[];
-  private spaceships: SpaceShip[];
-  constructor() {
-    this.packages = [
-      new ArmoredCapsules(),
-      new BiologicalSamples(),
-    ];
-    this.planets = [
-      new RockyPlanet(),
-      new GassyPlanet(),
-      new ColdPlanet(),
-      new CorrosivePlanet(),
-      new MagnetiPlanet(),
-    ];
-    this.spaceships = [
-      new cargoShip(),
-      new ScoutShip(),
-      new FastTransport(),
-      new ThermalShieldShip(),
-    ];
+export function starMission(ship: SpaceShip, Pla: Planet, Pkg: Package) {
+  // console.log(`${ship.spaceShipType} | Fuel: ${ship.fuelVolume} | Capacity: ${ship.capacity}`)
+  console.log(`Mission: ${ship.spaceShipType} -> ${Pla.typePlanet}`)
+  if (!ship.enoughFuel(Pla)) {
+    console.log(`${ship.spaceShipType} has no fuel to reach ${Pla.typePlanet}`)
+    return
+  } else if (!ship.compatiblePlanet(Pla.typePlanet)) {
+    console.log(`${ship.spaceShipType} is incompatible with ${Pla.typePlanet}`)
+    return
+  } else if (!ship.canCarry(Pkg.weight)) {
+    console.log(`${ship.spaceShipType} failed to deliver: : exceeds capacity."`)
+    return
+  } else if (!Pla.packageAccept(Pkg.type)) {
+    console.log(`failed to deliver "${Pkg.packageName}": cargo not accepted by ${Pla.typePlanet}.`)
+    return
+  } else if (!Pkg.inapropieteSpaceShip(ship.spaceShipType)) {
+    console.log(`${ship.spaceShipType} is not accept by ${Pkg.packageName}  `)
+    return
   }
-  // retirar depois:
-  printhhh(): void {
-    console.log(this.packages[0])
-    console.log(this.spaceships[0])
-    console.log(this.planets[0])
-  }
-  ////////////
-starMission(ship: SpaceShip, Pla: Planet, Pkg: Package[]){
-    // console.log(`${ship.spaceShipType} | Fuel: ${ship.fuelVolume} | Capacity: ${ship.capacity}`)
-    console.log(`Mission: ${ship.spaceShipType} -> ${Pla.typePlanet}`)
-    if(!ship.enoughFuel(Pla)){
-        console.log(`${ship.spaceShipType} has no fuel to reach ${Pla.typePlanet}`)
-    }
-    else if(!ship.compatiblePlanet(Pla.typePlanet)){
-        console.log(`${ship.spaceShipType} is incompatible with ${Pla.typePlanet}`)
-    }
-    
-    for(const i of Pkg){
 
-    }
-    else if(!ship.canCarry())
+  console.log(`${ship.spaceShipType} traveled to ${Pla.typePlanet} (${Pla.distance} km) | ( Atmosphere: ${Pla.atmosphere})`)
 
-}
-
+  console.log(`${ship.spaceShipType} delivered ${Pkg.packageName} to ${Pla.typePlanet} `)
+  console.log(
+    `fuel reaming: ${ship.fuelVolume - Math.floor(Pla.distance / ship.autonomy)} | Capacity remaining: ${
+      ship.capacity - Pkg.weight
+    }`
+  )
 }
