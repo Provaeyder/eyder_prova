@@ -1,4 +1,4 @@
-import { typePackage } from '../type'
+import { typePackage } from '../types/type'
 import { SpaceShip } from './spaceship'
 import { getRandomFloat, getRandomInt } from '../helper/random'
 export abstract class Package {
@@ -32,7 +32,7 @@ export class ArmoredCapsules extends Package {
 }
 export class BiologicalSamples extends Package {
   constructor() {
-    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, [], 'BiologicalSamples')
+    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, ['ScoutShip','FastTransport'], 'BiologicalSamples')
   }
   inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
@@ -46,7 +46,7 @@ export class BiologicalSamples extends Package {
 }
 export class CommunicationModules extends Package {
   constructor() {
-    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.eletronic, [], 'CommunicationModules')
+    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.eletronic, ['FastTransport','cargoShip'], 'CommunicationModules')
   }
   inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
@@ -60,7 +60,7 @@ export class CommunicationModules extends Package {
 }
 export class SupplyPackages extends Package {
   constructor() {
-    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, [], 'SupplyPackages')
+    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.supply, ['cargoShip'], 'SupplyPackages')
   }
   inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
@@ -74,7 +74,7 @@ export class SupplyPackages extends Package {
 }
 export class MiningTools extends Package {
   constructor() {
-    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.equipament, [], 'MiningTools')
+    super(getRandomFloat(1, 2), getRandomInt(30, 60), typePackage.equipament, ['ThermalShieldShip'], 'MiningTools')
   }
   inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {
@@ -88,7 +88,7 @@ export class MiningTools extends Package {
 }
 export class lazerGun extends Package {
   constructor() {
-    super(getRandomFloat(1, 2), getRandomInt(30, 50), typePackage.weapon, [], 'LazerGun')
+    super(getRandomFloat(1, 2), getRandomInt(30, 50), typePackage.weapon, ['ThermalShieldShip'], 'LazerGun')
   }
   inapropieteSpaceShip(spaceship: SpaceShip): boolean {
     for (const ship of this.limitation) {

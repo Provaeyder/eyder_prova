@@ -9,7 +9,7 @@ import {
 import { ColdPlanet, CorrosivePlanet, GassyPlanet, MagnetiPlanet, RockyPlanet } from './entities/planet'
 import { randomArray, randomItem } from './helper/random'
 import { cargoShip, FastTransport, ScoutShip, ThermalShieldShip } from './entities/spaceship'
-import { starMission } from './startmission'
+import { starMission } from './mission/startmission'
 const ships = [new cargoShip(), new ScoutShip(), new FastTransport(), new ThermalShieldShip()]
 const planets = [new RockyPlanet(), new GassyPlanet(), new ColdPlanet(), new CorrosivePlanet(), new MagnetiPlanet()]
 const packages = [
@@ -25,7 +25,7 @@ const chosePlanets = randomArray(planets, 3)
 const chosePackages = randomArray(packages, 5)
 
 for (let x = 0; x < 3; x++) {
-  console.log('=====================================================================')
+  console.log('====================================================================================')
   console.log(`Assigned ${choseShips[x].spaceShipType}\n`)
   for (let i = 0; i < chosePlanets.length; i++) {
     starMission(choseShips[x], randomItem(chosePlanets), randomItem(chosePackages))
@@ -33,5 +33,6 @@ for (let x = 0; x < 3; x++) {
   }
   console.log('\n')
 }
+
 
 

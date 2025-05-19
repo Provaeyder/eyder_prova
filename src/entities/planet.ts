@@ -1,5 +1,5 @@
-import { AtmosphereType } from '../atmosphere'
-import { typePackage } from '../type'
+import { AtmosphereType } from '../types/atmosphere'
+import { typePackage } from '../types/type'
 import { getRandomInt } from '../helper/random'
 import { Package } from './package'
 
