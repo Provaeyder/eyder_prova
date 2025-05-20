@@ -2,12 +2,12 @@ import { Planet } from './planet'
 import { getRandomFloat, getRandomInt } from '../helper/random'
 import { Package } from './package'
 export abstract class SpaceShip {
-  spaceShipType: String
-  capacity: number
-  fuelVolume: number
-  speed: number
-  autonomy: number
-  compatibility: string[]
+  public readonly spaceShipType: String
+  public readonly capacity: number
+  public readonly fuelVolume: number
+  public readonly speed: number
+  public readonly autonomy: number
+  public readonly compatibility: string[]
   constructor(
     capacity: number,
     speed: number,
